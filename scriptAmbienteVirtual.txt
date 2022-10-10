@@ -1,0 +1,5 @@
+pip install virtualenv
+
+virtualenv.exe .venv
+
+.\.venv\Scripts\activate
