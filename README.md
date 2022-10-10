@@ -1,1 +1,2 @@
 # TreinamentoVisaoComputacional
+#Alexandre Wilian Nikitin
