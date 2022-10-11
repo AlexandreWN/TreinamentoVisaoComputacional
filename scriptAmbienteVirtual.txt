@@ -3,3 +3,11 @@ pip install virtualenv
 virtualenv.exe .venv
 
 .\.venv\Scripts\activate
+
+
+//Criar executavel
+
+-pip install pyinstaller
+
+Dentro da pasta do projeto executar
+    -pyinstaller ./main.py #se quiser usar o mesmo usar o main.spec
