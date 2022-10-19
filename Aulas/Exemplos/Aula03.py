@@ -74,11 +74,13 @@ def ContornosFunction():
 
     lower_range = (0,200,200)
     upper_range  = (50,255,255)
-
+    kernel = np.ones((3,3))
     while(True):
         ret, frame = cap.read()
         mask = cv2.inRange(frame, lower_range, upper_range)
-        c, h = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        maskDilated = cv2.dilate(mask, kernel, iterations=4)
+        c, h = cv2.findContours(maskDilated, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
         cv2.imshow('frame1', frame)
         img_copy = frame.copy()
         for cnts in c:
@@ -87,12 +89,13 @@ def ContornosFunction():
             y -= 10
             w += 20
             h += 20
+            #Desenha linha em volta do pac man
             cv2.rectangle(img_copy, (x,y), (x+w, y+h), (0,255,0), 2, cv2.LINE_AA)
         cv2.imshow('Contorno', img_copy)
 
         img_cut = frame[y:y+h, x:x+w]
         cv2.imshow('Recorte', img_cut)
-        cv2.imshow('Mascara', mask)
+        cv2.imshow('Mascara', maskDilated)
         
         if cv2.waitKey(1000//30) & 0xFF == ord('q'):
             break
